@@ -1,0 +1,6 @@
+---
+- name: Install IRIS demo
+  hosts: bunvmub24
+  remote_user: root
+  roles:
+    - install_iris
