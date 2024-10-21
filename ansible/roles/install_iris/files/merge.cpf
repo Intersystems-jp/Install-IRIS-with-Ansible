@@ -1,0 +1,7 @@
+[config]
+globals=0,0,100,0,0,0
+routines=32
+
+[Actions]
+CreateDatabase:Name=NAKA,Directory=/data/naka
+CreateNamespace:Name=NAKA,Globals=NAKA,Interop=0
