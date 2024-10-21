@@ -1,0 +1,9 @@
+_system
+SYS
+
+set file="/var/tmp/result.txt"
+open file:"WNS"
+
+use file write "^naka=",$g(^naka)," at ",$ZDT($H)
+close file
+halt
