@@ -1,0 +1,13 @@
+---
+- name: Install Apache on Ubuntu
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: true
+  become: yes
+
+- name: Start and enable Apache on Ubuntu
+  ansible.builtin.systemd:
+    name: apache2
+    state: started
+    enabled: true
