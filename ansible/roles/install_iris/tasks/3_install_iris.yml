@@ -1,0 +1,56 @@
+---
+- name: Create the IRIS install directory
+  ansible.builtin.file:
+    path: /usr/irissys
+    state: directory
+
+- name: Create the database directory for NAKA
+  ansible.builtin.file:
+    path: /data/naka
+    state: directory
+
+- name: Put IRIS.DAT for NAKA
+  ansible.builtin.copy:
+    src: /root/kits/naka_IRIS.DAT
+    dest: /data/naka/IRIS.DAT
+    remote_src: true
+
+- name: Run the IRIS silent installer
+  ansible.builtin.command:
+    cmd: /root/kits/IRIS-2024.1.1.347.0-lnxubuntu2404x64/irisinstall_silent
+  environment:
+    ISC_PACKAGE_INSTANCENAME: IRIS
+    ISC_PACKAGE_INSTALLDIR: /usr/irissys
+    ISC_PACKAGE_UNICODE: Y
+    ISC_PACKAGE_INITIAL_SECURITY: Normal
+    ISC_PACKAGE_MGRUSER: root
+    ISC_PACKAGE_MGRGROUP: root
+    ISC_PACKAGE_USER_PASSWORD: SYS
+    ISC_PACKAGE_CSPSYSTEM_PASSWORD: SYS
+    ISC_PACKAGE_IRISUSER: root
+    ISC_PACKAGE_IRISGROUP: root
+    ISC_PACKAGE_CLIENT_COMPONENTS: "ODBC JDBC"
+    ISC_PACKAGE_WEB_SERVERTYPE: Apache
+    ISC_PACKAGE_WEB_APACHE_CONF: /etc/apache2/apache2.conf
+    ISC_PACKAGE_STARTIRIS: Y
+    ISC_CPF_MERGE_FILE: /root/kits/merge.cpf
+  register: install_output
+  ignore_errors: true
+
+- name: Display installation output
+  ansible.builtin.debug:
+    var: install_output.stdout_lines
+
+- name: Put the IRIS license key file
+  ansible.builtin.copy:
+    src: /root/kits/iris.key
+    dest: /usr/irissys/mgr/iris.key
+    remote_src: true
+
+- name: Restart IRIS to apply the license
+  ansible.builtin.command:
+    cmd: iris stop IRIS quietly restart
+
+- name: Display the portal URL
+  ansible.builtin.debug:
+    msg: "Portal URL : http://{{ ansible_host }}/csp/sys/UtilHome.csp"
