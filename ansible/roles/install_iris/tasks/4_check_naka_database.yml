@@ -1,0 +1,19 @@
+---
+- name: Transfer iris.script
+  ansible.builtin.copy:
+    src: ../files/iris.script
+    dest: /root/kits
+
+- name: Run iris.script to check global and class method
+  ansible.builtin.shell:
+    cmd: iris session IRIS -U NAKA < /root/kits/iris.script
+
+- name: Get result.txt
+  ansible.builtin.slurp:
+    src: /var/tmp/result.txt
+  register: iris_script_result
+
+- name: Display the result
+  ansible.builtin.debug:
+    msg: "{{ iris_script_result['content'] | b64decode }}"
+
