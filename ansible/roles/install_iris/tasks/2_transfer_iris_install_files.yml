@@ -1,0 +1,31 @@
+---
+- name: Create the kit directory
+  ansible.builtin.file:
+    path: /root/kits
+    state: directory
+
+- name: Transfer the IRIS install file
+  ansible.builtin.copy:
+    src: ../files/IRIS-2024.1.1.347.0-lnxubuntu2404x64.tar.gz
+    dest: /root/kits
+
+- name: Transfer the license key
+  ansible.builtin.copy:
+    src: ../files/iris.key
+    dest: /root/kits
+
+- name: Transfer the IRIS configuration merge file
+  ansible.builtin.copy:
+    src: ../files/merge.cpf
+    dest: /root/kits
+
+- name: Transfer IRIS.DAT for NAKA
+  ansible.builtin.copy:
+    src: ../files/naka_IRIS.DAT
+    dest: /root/kits
+
+- name: Uncompress the IRIS install file
+  ansible.builtin.unarchive:
+    src: /root/kits/IRIS-2024.1.1.347.0-lnxubuntu2404x64.tar.gz
+    dest: /root/kits
+    remote_src: true
