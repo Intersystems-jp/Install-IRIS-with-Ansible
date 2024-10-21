@@ -1,0 +1,12 @@
+---
+- name: Install Apache
+  ansible.builtin.import_tasks: 1_install_apache.yml
+
+- name: Transfer IRIS install files
+  ansible.builtin.import_tasks: 2_transfer_iris_install_files.yml
+
+- name: Install IRIS
+  ansible.builtin.import_tasks: 3_install_iris.yml
+
+- name: Check the global
+  ansible.builtin.import_tasks: 4_check_naka_database.yml
