@@ -162,7 +162,7 @@ PLAY RECAP *********************************************************************
 
 ## 参考資料
 
-(1) Ansible 基本 (Red Hat)  
+(1) Ansible 基本 (Red Hat, 日本語)  
 https://www.redhat.com/ja/topics/automation/learning-ansible-tutorial  
 
 (2) Ansible Script ドキュメント (Ansible Community, 英語)  
@@ -171,10 +171,10 @@ https://docs.ansible.com/ansible/latest/
 (3) Ansible Script ドキュメント (Ansible Community, 2.9 日本語)  
 https://docs.ansible.com/ansible/2.9_ja/
  
-(4) IRIS: Windows での自動インストール ドキュメント (InterSystems)  
+(4) IRIS: Windows での自動インストール ドキュメント (InterSystems, 日本語)  
 https://docs.intersystems.com/iris20241/csp/docbookj/DocBook.UI.Page.cls?KEY=GIWIN_unattended
  
-(5) IRIS: Linux での自動インストール ドキュメント (InterSystems)  
+(5) IRIS: Linux での自動インストール ドキュメント (InterSystems, 日本語)  
 https://docs.intersystems.com/iris20241/csp/docbookj/DocBook.UI.Page.cls?KEY=GIUNIX_unattended
 
 (6) "Leveraging Automaiton Tools for Developing InterSystems IRIS Applications" (InterSystems Global Summit 2024 Video, 英語)  
