@@ -72,7 +72,7 @@ ansible.cfg  hosts  install_iris.yml  roles
 IRIS-2024.1.1.347.0-lnxubuntu2404x64.tar.gz  iris.key  iris.script  merge.cpf  naka_IRIS.DAT
 ```
 
-(6) Ansible 実行ログに時刻を表示する目的で、[community.general](https://docs.ansible.com/ansible/latest/collections/community/general/index.html) をいれておく
+(6) Ansible 実行ログに時刻を表示する目的で、[community.general](https://docs.ansible.com/ansible/latest/collections/community/general/index.html) をインストール
 ```
 # ansible-galaxy collection install community.general
 ```
