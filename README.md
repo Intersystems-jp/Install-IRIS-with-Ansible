@@ -24,43 +24,62 @@ Ansible スクリプトで、以下を順番に実施します。
 
 ## サンプル実行手順
 
-以下、Red Hat = Ansible サーバ、Ubuntu = IRIS インストール先、とします。  
-ここでは Ubuntu アドレス = 192.168.10.2 としています。また Red Hat に root でログインして作業しています。  
-すべて **コントロールを行う Ansible サーバ、Red Hat ** で実施します。
-
+ここでは「Red Hat = Ansible サーバ」「Ubuntu = IRIS インストール先」です。  
+ターゲット先 Ubuntu アドレス = 192.168.10.2 としています。  
+以下の手順はすべて、**コントロールを行う Ansible サーバ = Red Hat** で実施します。本手順では root でログインして作業しています。  
+  
 1. Ansible をインストール
 ```
 # dnf install ansible-core
 # ansible --version
+ansible [core 2.14.14]
 ```
-
+  
 2. ターゲット先 Ubuntu に パスワードなしで ssh ログインできるようにしておく   
 ```
 以下コマンドで公開鍵作成。全部リターンで /root/.ssh/id_xxx.pnb が作成される
 # ssh-keygen
 
-上記を以下コマンドで、ターゲット先 Ubuntu にコピーする
+作成した公開鍵を、以下コマンドでターゲット先 Ubuntu にコピー
 # ssh-copy-id root@192.168.10.2
 
 パスワードなしでログインできることを確認
 # ssh root@192.168.10.2
 ```
+  
 3. 本リポジトリで公開している ansible 以下を、/etc/ansible としてコピー
 ```
 # ls /etc/ansible
 ansible.cfg  hosts  install_iris.yml  roles
 ```
-
+  
 4. Ansible 経由で疎通チェック
+```
 接続先情報は /etc/ansible/hosts に記述
-```
 # ansible bunvmub24 -m ping
+192.168.10.2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+```
+  
+5. IRISインストールキットとライセンスキーを用意し、適切な場所に置く
+```
+# ls /etc/ansible/roles/install_iris/files/
+IRIS-2024.1.1.347.0-lnxubuntu2404x64.tar.gz  iris.key  iris.script  merge.cpf  naka_IRIS.DAT
 ```
 
+6. Ansible 実行ログに時刻を表示する目的で、[community.general](https://docs.ansible.com/ansible/latest/collections/community/general/index.html) をいれておく
+```
+# ansible-galaxy collection install community.general
+```
+  
+7. 実行
+```
+# ansible-playbook /etc/ansible/demo.yml
+```
 
-3. Ansible 経由で疎通チェック
-```
-# ansible
-```
-5. 
 6.  
