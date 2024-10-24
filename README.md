@@ -12,15 +12,16 @@ Ansible を使って別サーバに IRIS を自動インストール＋初期設
 
 ## サンプル概要
 
-Ansible スクリプトで、以下を順番に実施します。
+Ansible スクリプトで、以下を順番に実施します。リンクは関連するスクリプト名です。  
 
-- ターゲットサーバに、Apache をインストールします。
-- ターゲットサーバに、IRIS インストールに必要な関連ファイルを転送します。
-- ターゲットサーバ先で、IRIS インストールスクリプトを実行し、IRIS をインストール。インストールと同時に以下の設定を行います。
+- ターゲットサーバに、Apache をインストールします ([1_install_apache.yml](https://github.com/Intersystems-jp/Install-IRIS-with-Ansible/blob/main/ansible/roles/install_iris/tasks/1_install_apache.yml))
+- ターゲットサーバに、IRIS インストールに必要な関連ファイルを転送します ([2_transfer_iris_install_files.yml](https://github.com/Intersystems-jp/Install-IRIS-with-Ansible/blob/main/ansible/roles/install_iris/tasks/2_transfer_iris_install_files.yml))
+- ターゲットサーバ先で、IRIS インストールスクリプトを実行し、IRIS をインストール。インストールと同時に以下の設定を行います ([3_install_iris.yml](https://github.com/Intersystems-jp/Install-IRIS-with-Ansible/blob/main/ansible/roles/install_iris/tasks/3_install_iris.yml))
    - グローバルキャッシュ・ルーチンキャッシュを設定
    - ネームスペース NAKA を定義
-- ターゲットサーバ先で、IRIS にログインし、ネームスペース NAKA のグローバル ^naka を確認してファイルに出力します。
-- Ansible サーバから、ターゲット先の (4) のファイルの中身を取得し、画面に表示します。
+   - 上記設定は [merge.cpf](https://github.com/Intersystems-jp/Install-IRIS-with-Ansible/blob/main/ansible/roles/install_iris/files/merge.cpf) を通じて行います
+- ターゲットサーバ先で、IRIS にログインし、ネームスペース NAKA のグローバル ^naka を確認してターゲット先のファイルに出力。その内容を取得し、画面に表示します ([4_check_naka_database.yml](https://github.com/Intersystems-jp/Install-IRIS-with-Ansible/blob/main/ansible/roles/install_iris/tasks/4_check_naka_database.yml), [iris.script](https://github.com/Intersystems-jp/Install-IRIS-with-Ansible/blob/main/ansible/roles/install_iris/files/iris.script))
+
 
 ## サンプル実行手順
 
